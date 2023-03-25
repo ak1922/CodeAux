@@ -168,3 +168,9 @@ resource "aws_nat_gateway" "akvpc-NGW" {
     "Name" = "akvpc-NGW"
   }
 }
+
+resource "aws_route" "akvpc-NGW-Route" {
+  route_table_id = aws_route_table.akvpc-PrivateRT.id
+  gateway_id = aws_nat_gateway.akvpc-NGW.id
+  destination_cidr_block = "0.0.0.0/0"
+}
